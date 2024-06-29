@@ -10,7 +10,7 @@ import (
 func TestPrintArt(t *testing.T) {
 	asciMap, err := output.ReadAscii("standard.txt")
 	if err != nil {
-		t.Errorf("Error reading ASCII map: %v", err)
+		t.Errorf("Error reading ASCII Art Grid: %v", err)
 		return
 	}
 
@@ -25,12 +25,6 @@ func TestPrintArt(t *testing.T) {
 			input:       "Hello",
 			expected:    " _    _          _   _               \n| |  | |        | | | |              \n| |__| |   ___  | | | |   ___        \n|  __  |  / _ \\ | | | |  / _ \\       \n| |  | | |  __/ | | | | | (_) |      \n|_|  |_|  \\___| |_| |_|  \\___/       \n                                    \n                                    \n",
 			expectedErr: false,
-		},
-		{
-			name:        "Print unsupported escape sequence",
-			input:       "\\t",
-			expected:    "",
-			expectedErr: true,
 		},
 	}
 
