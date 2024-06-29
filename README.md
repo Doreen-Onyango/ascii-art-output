@@ -1,4 +1,4 @@
-# ASCII Art Generator
+# ASCII Art Output
 
 ASCII Art Generator is a program written in Go that converts input strings into graphic representations using ASCII characters.
 
@@ -7,39 +7,35 @@ ASCII Art Generator is a program written in Go that converts input strings into 
 - Converts strings into ASCII art
 - Supports numbers, letters, spaces, special characters, and newline characters ('\n')
 - Utilizes specific graphical templates for ASCII representation
+- Writes the ascii art into a file if output flag is specified
 
 ## Installation
 
 1. Clone the repository:
 
     ```bash
-    git clone https://learn.zone01kisumu.ke/git/khahussein/ascii-art
+    git clone https://learn.zone01kisumu.ke/git/doonyango/ascii-art-output.git
     ```
 
 2. Navigate to the project directory:
 
     ```bash
-    cd ascii-art
+    cd ascii-art-output/
     ```
 
-3. Build the project:
-
-    ```bash
-    go build .
-    ```
 
 ## Usage
 
-To generate ASCII art for a string, run the following command:
+To generate ASCII art for a string or write the ascii art into a file, run the following command:
 
 ```bash
-./ascii-art "input string"
+go run . "string"
 ```
 
 Example:
 
 ```bash
-./ascii-art "Hello\n" | cat -e
+go run . "Hello\n" | cat -e
 ```
 
 Output:
@@ -55,6 +51,32 @@ Output:
                                 $
 $                                                  
 ```
+```
+go run . --output=<fileName.txt> something standard
+```
+Output
+
+cat -e fileName.txt
+```
+                                  _     _       _                  
+                                 | |   | |     (_)                 
+ ___    ___    _ __ ___     ___  | |_  | |__    _   _ __     __ _  
+/ __|  / _ \  | '_ ` _ \   / _ \ | __| |  _ \  | | | '_ \   / _` | 
+\__ \ | (_) | | | | | | | |  __/ \ |_  | | | | | | | | | | | (_| | 
+|___/  \___/  |_| |_| |_|  \___|  \__| |_| |_| |_| |_| |_|  \__, | 
+                                                             __/ | 
+                                                            |___/  
+```
+
+### Testing
+```
+cd tests/
+```
+```
+go test -v
+```
+
+
 
 ## File Formats
 
