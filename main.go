@@ -63,7 +63,7 @@ func main() {
 
 	write, err := print.WriteArt(input, asciiArtGrid)
 	if err != nil {
-		log.Fatal("Error writing to file")
+		log.Fatalf("Error writing to file: %v", err)
 	}
 
 	if *flname != "" {
