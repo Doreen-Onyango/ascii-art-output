@@ -35,7 +35,7 @@ func WriteArt(str string, asciiArtGrid [][]string) (string, error) {
 			} else {
 				err := writeWord(word, asciiArtGrid, &result)
 				if err != nil {
-					return result.String(), err
+					return "", err
 				}
 			}
 		}
