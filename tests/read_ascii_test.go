@@ -1,31 +1,33 @@
 package output
 
 import (
-	"reflect"
 	"testing"
 
 	output "output/readWrite"
 )
 
 func TestReadAscii(t *testing.T) {
-	type args struct {
-		filename string
-	}
 	tests := []struct {
-		name    string
-		args    args
-		want    [][]string
-		wantErr bool
-	}{}
+		name     string
+		filename string
+		want     bool
+	}{
+		{
+			name:     "valid file name",
+			filename: "shadow.txt",
+			want:     true,
+		},
+		{
+			name:     "invalid file name",
+			filename: "invalid.txt",
+			want:     false,
+		},
+	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := output.ReadAscii(tt.args.filename)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("ReadAscii() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ReadAscii() = %v, want %v", got, tt.want)
+			got := output.ValidateFileName(tt.filename)
+			if got != tt.want {
+				t.Errorf("validateFileName(%s) = %v, want %v", tt.filename, got, tt.want)
 			}
 		})
 	}
