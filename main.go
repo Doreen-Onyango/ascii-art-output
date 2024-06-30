@@ -8,6 +8,7 @@ import (
 	check "output/checksum"
 	print "output/printAscii"
 	output "output/readWrite"
+	usage "output/utils"
 )
 
 var banners = map[string]string{
@@ -23,7 +24,7 @@ func main() {
 	args := flag.Args()
 
 	if len(args) == 0 {
-		fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]\n\nEX: go run . --output=<fileName.txt> something standard")
+		usage.PrintUsage()
 		return
 	}
 

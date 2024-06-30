@@ -1,15 +1,17 @@
 package output
 
 import (
-	"fmt"
 	"io"
 	"os"
 	"strings"
+
+	usage "output/utils"
 )
 
 func WriteAscii(content, flname string) error {
 	if !strings.HasSuffix(flname, ".txt") {
-		return fmt.Errorf("usage: go run . --output=<fileName.txt> something standard")
+		usage.PrintUsage()
+		return nil
 	}
 	file, err := os.Create(flname)
 	if err != nil {
