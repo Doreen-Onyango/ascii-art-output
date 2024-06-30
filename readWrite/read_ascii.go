@@ -13,13 +13,13 @@ var files = map[string]bool{
 	"thinkertoy.txt": true,
 }
 
-func validateFileName(file string) bool {
+func ValidateFileName(file string) bool {
 	_, ok := files[file]
 	return ok
 }
 
 func ReadAscii(filename string) ([][]string, error) {
-	if !validateFileName(filename) {
+	if !ValidateFileName(filename) {
 		return nil, fmt.Errorf("unsupported file name: %s", filename)
 	}
 
