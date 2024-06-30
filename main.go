@@ -62,13 +62,13 @@ func main() {
 		log.Fatalf("Error reading ASCII map: %v", err)
 	}
 
-	write, err := print.WriteArt(input, asciiArtGrid)
+	data, err := print.WriteArt(input, asciiArtGrid)
 	if err != nil {
 		log.Fatalf("Error writing to file: %v", err)
 	}
 
 	if *flname != "" {
-		err = output.WriteAscii(write, *flname)
+		err = output.WriteAscii(data, *flname)
 		if err != nil {
 			log.Printf("error: %v", err)
 		}
