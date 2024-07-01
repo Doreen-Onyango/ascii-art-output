@@ -14,11 +14,11 @@ func WriteAscii(content, fileName string) error {
 		return err
 	}
 
-	errr := os.WriteFile(fileName, []byte(content), 0o644)
-	if errr != nil {
-		return fmt.Errorf("error while creating a file: %v", errr)
+	err = os.WriteFile(fileName, []byte(content), 0o644)
+	if err != nil {
+		return fmt.Errorf("error while creating a file: %v", err)
 	}
-	return errr
+	return err
 }
 
 func isValidFileName(fileName string) bool {
