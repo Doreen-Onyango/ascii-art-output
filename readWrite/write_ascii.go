@@ -10,7 +10,7 @@ import (
 var err = errors.New("usage: go run . --output=<fileName.txt> something standard")
 
 func WriteAscii(content, fileName string) error {
-	if !isValidOutputFileName(fileName) {
+	if !isValidFileName(fileName) {
 		return err
 	}
 
@@ -21,7 +21,7 @@ func WriteAscii(content, fileName string) error {
 	return errr
 }
 
-func isValidOutputFileName(fileName string) bool {
+func isValidFileName(fileName string) bool {
 	match, err := regexp.MatchString(`^.+\.txt$`, fileName)
 	if err != nil {
 		fmt.Printf("Error, %v", err)
