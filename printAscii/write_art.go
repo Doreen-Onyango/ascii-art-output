@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// Generates ASCII art from the input string using the provided ASCII art grid.
 func WriteArt(str string, asciiArtGrid [][]string) (string, error) {
 	var result strings.Builder
 
@@ -43,6 +44,7 @@ func WriteArt(str string, asciiArtGrid [][]string) (string, error) {
 	return result.String(), nil
 }
 
+// Writes the ASCII representation of a word using the provided ASCII art grid.
 func writeWord(word string, asciiArtGrid [][]string, res *strings.Builder) error {
 	for i := 1; i <= 8; i++ {
 		for _, char := range word {
