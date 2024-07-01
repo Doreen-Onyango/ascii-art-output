@@ -1,26 +1,30 @@
 package output
 
 import (
-	"io"
+	"errors"
+	"fmt"
 	"os"
-	"strings"
-
-	usage "output/utils"
+	"regexp"
 )
 
-func WriteAscii(content, flname string) error {
-	if !strings.HasSuffix(flname, ".txt") {
-		usage.PrintUsage()
-		return nil
-	}
-	file, err := os.Create(flname)
-	if err != nil {
+var err = errors.New("usage: go run . --output=<fileName.txt> something standard")
+
+func WriteAscii(content, fileName string) error {
+	if !isValidFileName(fileName) {
 		return err
 	}
-	defer file.Close()
-	_, err = io.WriteString(file, content)
-	if err != nil {
-		return err
+
+	errr := os.WriteFile(fileName, []byte(content), 0o644)
+	if errr != nil {
+		return fmt.Errorf("error while creating a file: %v", errr)
 	}
-	return nil
+	return errr
+}
+
+func isValidFileName(fileName string) bool {
+	match, err := regexp.MatchString(`^.+\.txt$`, fileName)
+	if err != nil {
+		fmt.Printf("Error, %v", err)
+	}
+	return match
 }

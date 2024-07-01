@@ -1,6 +1,6 @@
 # ASCII Art Output
 
-ASCII Art Generator is a program written in Go that converts input strings into graphic representations using ASCII characters.
+This project involves creating a Go program that generates ASCII art based on a given string and banner style, and writes the result into a file when output flag is specified.Additionally, it runs with a single [STRING] argument.
 
 ## Features
 
