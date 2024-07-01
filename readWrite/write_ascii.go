@@ -2,21 +2,29 @@ package output
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"regexp"
 )
 
-var ErrInvalidFileName = errors.New("usage: go run . --output=<fileName.txt> something standard")
+var err = errors.New("usage: go run . --output=<fileName.txt> something standard")
 
 func WriteAscii(content, fileName string) error {
-    if !isValidOutputFileName(fileName) {
-        return ErrInvalidFileName
-    }
+	if !isValidOutputFileName(fileName) {
+		return err
+	}
 
-    return os.WriteFile(fileName, []byte(content), 0644)
+	errr := os.WriteFile(fileName, []byte(content), 0o644)
+	if errr != nil {
+		return fmt.Errorf("error while creating a file: %v", errr)
+	}
+	return errr
 }
 
 func isValidOutputFileName(fileName string) bool {
-    match, _ := regexp.MatchString(`^.+\.txt$`, fileName)
-    return match
+	match, err := regexp.MatchString(`^.+\.txt$`, fileName)
+	if err != nil {
+		fmt.Printf("Error, %v", err)
+	}
+	return match
 }
