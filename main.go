@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"os"
+	"strings"
 
 	check "output/checksum"
 	print "output/printAscii"
@@ -21,6 +23,23 @@ func main() {
 	checksum := flag.Bool("checksum", false, "Check integrity of specified file")
 	flname := flag.String("output", "", "Usage: go run . [OPTION] [STRING] [BANNER]")
 	flag.Parse()
+
+	var presentF, correctF bool
+	flag.Visit(func(f *flag.Flag) {
+		if f.Name == "output" {
+			presentF = true
+			result := strings.Replace(os.Args[1], *flname, "", 1)
+			if !(result == "--output=") {
+				correctF = true
+			}
+		}
+	})
+
+	if presentF && correctF {
+		usage.PrintUsage()
+		return
+	}
+
 	args := flag.Args()
 
 	if len(args) == 0 {
@@ -68,7 +87,13 @@ func main() {
 	}
 
 	if *flname != "" {
-		err = output.WriteAscii(data, *flname)
+		filename := strings.TrimPrefix(*flname, "--output=")
+		if filename == "" {
+			fmt.Println("Error: --output flag must be followed by a filename")
+			usage.PrintUsage()
+			os.Exit(1)
+		}
+		err = output.WriteAscii(data, filename)
 		if err != nil {
 			log.Printf("error: %v", err)
 		}
