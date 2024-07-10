@@ -36,7 +36,6 @@ func main() {
 	})
 
 	if presentF && correctF {
-		fmt.Println("Error: --output flag must be in the format --output=<filename.txt>")
 		usage.PrintUsage()
 		return
 	}
